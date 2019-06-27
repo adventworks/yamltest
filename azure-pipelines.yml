@@ -17,12 +17,16 @@ stages:
 - stage: B
   dependsOn: A
   jobs:
-  - job: B
+  - deployment: B
+    environment: Vijay    
     pool:
       vmImage: 'Ubuntu 16.04'
-    steps:
-    - checkout: none
-    - script: echo B!
+    strategy:
+     runOnce:
+       deploy:         
+        steps:
+        - checkout: none
+        - script: echo B!
 
 - stage: C
   dependsOn: A
